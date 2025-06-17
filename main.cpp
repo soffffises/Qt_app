@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <QDir>
 
 #include "TemperatureModel.h"
 #include "TemperatureController.h"
@@ -19,7 +20,9 @@ int main(int argc, char *argv[]) {
     engine.rootContext()->setContextProperty("temperatureModel", &model);
     engine.rootContext()->setContextProperty("temperatureController", &controller);
 
-    engine.load(QUrl::fromLocalFile("D:/Qt/homework/Main.qml"));
+    QString qmlPath = QDir(QCoreApplication::applicationDirPath()).filePath("Main.qml");
+
+    engine.load(QUrl::fromLocalFile(qmlPath));
 
     if (engine.rootObjects().isEmpty())
         return -1;
